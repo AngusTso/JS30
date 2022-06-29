@@ -94,6 +94,36 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  let lastcheck;
+  let index = 0;
+
+  checkboxes.forEach((inbox) => {
+    inbox.addEventListener("click" , checkHandler);
+  });
+
+  function checkHandler(e){
+    let inBetween = false;
+    // 檢查是否按著shift點選
+    if (e.shiftKey && this.checked) {
+        checkboxes.forEach(checkbox => {
+        // 當前點選的checkbox開始記錄到最後一個點選的checkbox關閉標記
+        if (checkbox === this || checkbox === lastChecked) {
+            inBetween = !inBetween;
+            console.log('STarting to check them inbetween!');
+        }
+        // 勾選區間內為true的checkbox
+        if (inBetween) {
+            checkbox.checked = true;
+        }
+        });
+    }
+    lastChecked = this;
+  }
+
+
+  
+
 </script>
 </body>
 </html>
